@@ -11,9 +11,9 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Product,
-          attributes: ['id', 'product_name', 'price', 'stock'], 
+          attributes: ['id', 'product_name', 'price', 'stock'],
         },
-        
+
       ],
       attributes: [
         'id',
@@ -23,18 +23,18 @@ router.get('/', async (req, res) => {
 
     res.json(tagData);
   } catch (error) {
-    res.json({message: error.message});
-  }  
+    res.json({ message: error.message });
+  }
 });
 
 // find a single tag by its `id`
 router.get('/:id', async (req, res) => {
-  
+
   try {
-    const tagData = await Tag.findByPk(req.params.id,{
-      
+    const tagData = await Tag.findByPk(req.params.id, {
+
       attributes: [
-        'id', 
+        'id',
         'tag_name'
       ],
       // be sure to include its associated Product data
@@ -55,21 +55,23 @@ router.get('/:id', async (req, res) => {
     res.json(tagData);
 
   } catch (error) {
-    res.json({message: error.message});
+    res.json({ message: error.message });
   }
- 
+
 });
 
 // create a new tag
 router.post('/', async (req, res) => {
   try {
 
-    const tagData = await Tag.create(req.body);
+    const tagData = await Tag.create({
+      tag_name: req.body.tag_name
+    });
 
     res.json(tagData);
 
   } catch (error) {
-    res.json({message: error.message});
+    res.json({ message: error.message });
   }
 });
 
@@ -93,7 +95,7 @@ router.put('/:id', async (req, res) => {
 
     res.json(tagData);
   } catch (error) {
-    res.json({message: error.message});
+    res.json({ message: error.message });
   }
 });
 
@@ -111,7 +113,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
   } catch (error) {
-    res.json({message: error.message});
+    res.json({ message: error.message });
   }
 });
 

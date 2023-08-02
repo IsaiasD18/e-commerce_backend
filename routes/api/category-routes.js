@@ -96,6 +96,7 @@ router.delete('/:id', async (req, res) => {
       res.json('No product found with that id!')
       return;
     }
+    res.json(catData);
     
   } catch (error) {
     res.json({ message: error.message });
